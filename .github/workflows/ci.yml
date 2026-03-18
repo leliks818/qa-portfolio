@@ -26,18 +26,15 @@ jobs:
           python -m pip install poetry
 
       - name: Install deps
-        working-directory: qa-portfolio
         run: |
           poetry --version
           poetry install --with dev
 
       - name: Install Playwright Chromium
-        working-directory: qa-portfolio
         run: |
           poetry run playwright install --with-deps chromium
 
       - name: Run tests
-        working-directory: qa-portfolio
         env:
           HEADLESS: "1"
         run: |
@@ -46,7 +43,6 @@ jobs:
 
       - name: Build Allure HTML report
         if: always()
-        working-directory: qa-portfolio
         run: |
           npm i -g allure-commandline --silent
           allure generate reports/allure-results -o reports/allure-report --clean
@@ -56,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: reports
-          path: qa-portfolio/reports
+          path: reports

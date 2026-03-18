@@ -39,17 +39,14 @@ jobs:
           python -m pip install poetry
 
       - name: Install deps
-        working-directory: qa-portfolio
         run: |
           poetry install --with dev
 
       - name: Install Playwright Chromium
-        working-directory: qa-portfolio
         run: |
           poetry run playwright install --with-deps chromium
 
       - name: Run tests + collect Allure results
-        working-directory: qa-portfolio
         env:
           HEADLESS: "1"
         run: |
@@ -57,13 +54,11 @@ jobs:
           poetry run pytest -v --html=reports/report.html --self-contained-html --alluredir=reports/allure-results
 
       - name: Build Allure HTML report
-        working-directory: qa-portfolio
         run: |
           npm i -g allure-commandline --silent
           allure generate reports/allure-results -o reports/allure-report --clean
 
       - name: Build Pages site
-        working-directory: qa-portfolio
         run: |
           mkdir -p site
           cp -R reports/allure-report site/allure
@@ -101,9 +96,8 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: qa-portfolio/site
+          path: site
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
