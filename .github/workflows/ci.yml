@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -39,6 +43,13 @@ jobs:
         run: |
           mkdir -p reports/allure-results
           poetry run pytest -v --html=reports/report.html --self-contained-html --alluredir=reports/allure-results
+
+      - name: Build Allure HTML report
+        if: always()
+        working-directory: qa-portfolio
+        run: |
+          npm i -g allure-commandline --silent
+          allure generate reports/allure-results -o reports/allure-report --clean
 
       - name: Upload reports artifact
         if: always()

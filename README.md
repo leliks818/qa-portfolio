@@ -23,7 +23,12 @@ Run locally and generate proof artifacts:
 pytest tests/ -v --html=reports/report.html --self-contained-html --alluredir=reports/allure-results
 ```
 
-If you have Allure CLI installed:
+Allure dashboard options:
+
+1) GitHub Pages (recommended): after push to `main`, workflow `.github/workflows/pages.yml` publishes a live dashboard.
+Expected URL: `https://leliks818.github.io/qa-portfolio/`
+
+2) Locally, if you have Allure CLI installed:
 
 ```bash
 allure serve reports/allure-results
