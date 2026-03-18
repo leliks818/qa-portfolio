@@ -1,0 +1,17 @@
+.idea/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+.venv/
+venv/
+
+reports/*
+playwright-report/
+test-results/
+
+# Keep portfolio "proof" artifacts under version control.
+!reports/
+!reports/report.html
+!reports/allure-results/
+!reports/allure-results/**

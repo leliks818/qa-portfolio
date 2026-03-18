@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "qa-portfolio"
+version = "0.1.0"
+description = "QA automation portfolio: pytest + selenium + playwright"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-html = "^4.1.0"
+allure-pytest = "^2.13.0"
+requests = "^2.31.0"
+selenium = "^4.18.0"
+playwright = "^1.41.0"
+pytest-playwright = "^0.4.4"
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
