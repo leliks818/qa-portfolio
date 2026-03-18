@@ -15,3 +15,7 @@ test-results/
 !reports/report.html
 !reports/allure-results/
 !reports/allure-results/**
+
+# Local-only interview notes (do not commit)
+docs/PROJECT_DESCRIPTION_RU.md
+docs/INTERVIEW_NOTES*.md

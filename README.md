@@ -1,62 +1,84 @@
 # QA Automation Portfolio
 
-Pytest-based QA automation portfolio: Selenium UI + Playwright API, with HTML and Allure reports.
+Automation QA portfolio project built on `pytest` with:
+- Selenium UI test(s) against `the-internet.herokuapp.com`
+- Playwright API test(s) (request context)
+- Reports: `pytest-html` + Allure
+- CI: GitHub Actions + published reports via GitHub Pages
 
 ![CI](https://github.com/leliks818/qa-portfolio/actions/workflows/ci.yml/badge.svg)
 
-CI: GitHub Actions workflow in `.github/workflows/ci.yml` (uploads `reports/` as an artifact).
+## Live Reports (GitHub Pages)
+
+After each push to `main` (and also on schedule), GitHub Actions publishes the latest reports:
+
+- Allure dashboard: `https://leliks818.github.io/qa-portfolio/allure/`
+- pytest-html report: `https://leliks818.github.io/qa-portfolio/report.html`
+
+If Pages is not enabled yet: `Settings` → `Pages` → `Source: GitHub Actions`.
 
 ## Current Metrics
 
-- Tests: 6 total (5 passing + 1 xfail example kept intentionally)
-- Reports: [HTML report](reports/report.html), [Allure results](reports/allure-results)
+- Tests: 36 total (35 passing + 1 xfail example kept intentionally)
+- Proof artifacts in repo: [reports/report.html](reports/report.html), [reports/allure-results](reports/allure-results)
 
-Add screenshots to `docs/` for README visuals:
-- `docs/report-html.png` (pytest-html table)
-- `docs/allure-dashboard.png` (Allure dashboard)
+## What’s Covered
 
-## Reports
+- UI (Selenium): 30+ browser tests on a demo app (configurable base URL)
+- API (Playwright): REST smoke validation via Playwright request context
+- Pytest regression patterns: parametrization, markers, and an `xfail` example
 
-Run locally and generate proof artifacts:
+## Quick Start
+
+Generate both HTML report and Allure results:
 
 ```bash
 pytest tests/ -v --html=reports/report.html --self-contained-html --alluredir=reports/allure-results
 ```
 
-Allure dashboard options:
-
-1) GitHub Pages (recommended): after push to `main`, workflow `.github/workflows/pages.yml` publishes a live dashboard.
-Expected URL: `https://leliks818.github.io/qa-portfolio/`
-
-2) Locally, if you have Allure CLI installed:
+If you have Allure CLI installed locally:
 
 ```bash
 allure serve reports/allure-results
 ```
 
-Screenshots (add these files to `docs/`):
+Windows helper (optional):
 
-![pytest-html report](docs/report-html.png)
+```powershell
+.\scripts\reports.ps1
+```
 
-![Allure dashboard](docs/allure-dashboard.png)
+## Setup Options
 
-## Quick Run (Poetry)
+### Option A: Poetry (recommended for CI parity)
 
 ```bash
 poetry install --with dev
 poetry run pytest -v --html=reports/report.html --self-contained-html --alluredir=reports/allure-results
 ```
 
-## Quick Run (pip, no Poetry)
-
-If you are using a plain interpreter in PyCharm (no Poetry env), install the needed plugins once:
+### Option B: pip (PyCharm plain interpreter)
 
 ```bash
 python -m pip install selenium playwright pytest-playwright pytest-html allure-pytest requests
 python -m pytest tests/ -v --html=reports/report.html --self-contained-html --alluredir=reports/allure-results
 ```
 
-## Notes
+## Configuration
 
-- Selenium UI uses `https://the-internet.herokuapp.com` by default (override with `BASE_URL`).
-- `HEADLESS=0` disables headless browser mode for Selenium tests.
+- `BASE_URL` (default: `https://the-internet.herokuapp.com`)
+- `HEADLESS=0` disables headless mode for Selenium tests
+
+## CI/CD
+
+- CI workflow: `.github/workflows/ci.yml` (runs tests, generates reports, uploads `reports/` as an artifact)
+- Pages workflow: `.github/workflows/pages.yml` (builds a static site with Allure + pytest-html and deploys to Pages)
+
+## Screenshots (for README visuals)
+
+Add your own screenshots here (not generated automatically):
+- `docs/report-html.png` (pytest-html table)
+- `docs/allure-dashboard.png` (Allure dashboard overview)
+
+![pytest-html report](docs/report-html.png)
+![Allure dashboard](docs/allure-dashboard.png)
