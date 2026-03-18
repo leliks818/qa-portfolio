@@ -3,6 +3,10 @@ name: Publish Allure (GitHub Pages)
 on:
   push:
     branches: [main]
+  schedule:
+    # GitHub Actions cron is in UTC.
+    # Runs at 09:00 UTC on Mondays and Thursdays (tweak as desired).
+    - cron: "0 9 * * 1,4"
   workflow_dispatch:
 
 permissions:
